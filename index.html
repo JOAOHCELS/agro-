@@ -1,0 +1,198 @@
+
+
+
+
+`agrinho.html`
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agrinho - Mini Farm Tracker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Baloo 2', cursive, Arial, sans-serif;
+    background: linear-gradient(135deg, #a8e063 0%, #56ab2f 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  header {
+    background: rgba(255, 255, 255, 0.15);
+    width: 100%;
+    text-align: center;
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-size: 2.5rem;
+    letter-spacing: 0.15rem;
+    text-shadow: 2px 2px 4px #3d6e0b;
+    user-select: none;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px;
+    width: 90%;
+    margin-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .farm-image {
+    width: 100%;
+    max-width: 400px;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .buttons-container {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  button {
+    background: #e8f5e9;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px #3b7925;
+    color: #2e7d32;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+    transition: transform 0.15s ease, background-color 0.3s ease;
+    user-select: none;
+    flex: 1 1 140px;
+    max-width: 180px;
+  }
+  button:hover {
+    background: #aedaa2;
+    transform: scale(1.1);
+  }
+  button:active {
+    transform: scale(0.95);
+  }
+
+  .fact-box {
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    font-size: 1.3rem;
+    color: #1b3b00;
+    text-align: center;
+    min-height: 100px;
+    max-width: 600px;
+    line-height: 1.4;
+    user-select: none;
+  }
+
+  footer {
+    text-align: center;
+    color: #d0f0c0;
+    font-size: 0.9rem;
+    margin: 2rem 0 1rem 0;
+    user-select: none;
+  }
+
+  /* subtle floating animation to farm image */
+  @keyframes floatFarm {
+    0%, 100% { transform: translateY(0) }
+    50% { transform: translateY(-10px) }
+  }
+  .farm-image {
+    animation: floatFarm 5s ease-in-out infinite;
+  }
+</style>
+</head>
+<body>
+<header>Agrinho - Mini Farm Tracker</header>
+<main>
+  <!-- Cute farm illustration from open source SVG by unDraw or similar -->
+  <svg class="farm-image" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" >
+    <rect width="512" height="512" fill="#a4de02" rx="48" />
+    <rect x="150" y="290" width="210" height="150" fill="#7cb342" rx="15" />
+    <polygon points="150,290 255,170 360,290" fill="#4caf50" />
+    <rect x="230" y="330" width="50" height="60" fill="#f9a825" rx="6" />
+    <circle cx="180" cy="100" r="30" fill="#fff176" />
+    <circle cx="332" cy="100" r="30" fill="#fff176" />
+    <circle cx="256" cy="256" r="14" fill="#f57c00" />
+    <circle cx="220" cy="270" r="14" fill="#ef6c00" />
+    <circle cx="290" cy="270" r="14" fill="#ef6c00" />
+  </svg>
+
+  <div class="buttons-container" role="group" aria-label="Animal facts buttons">
+    <button id="btn-chicken" aria-describedby="fact-desc">Frango</button>
+    <button id="btn-cow" aria-describedby="fact-desc">Vaca</button>
+    <button id="btn-pig" aria-describedby="fact-desc">Porco</button>
+    <button id="btn-plant" aria-describedby="fact-desc">Planta</button>
+  </div>
+
+  <div class="fact-box" id="fact-box" role="region" aria-live="polite" aria-atomic="true" aria-describedby="fact-desc">
+    Clique no botão para ver uma curiosidade.
+  </div>
+</main>
+<footer>
+  &copy; 2024 Agrinho - Seu Mini App de Fazenda
+</footer>
+
+<script>
+  const facts = {
+    chicken: [
+      "Galinha pode lembrar mais de 100 rostos diferentes de pessoas e animais!",
+      "O frango é a ave doméstica mais comum no mundo.",
+      "Galos cantam para proteger seu território e avisar os outros galos."
+    ],
+    cow: [
+      "Vacas têm um excelente senso de olfato e podem sentir cheiros até 6 km.",
+      "Vacas podem dormir em pé, mas só sonham deitadas.",
+      "Uma vaca adulta pode produzir até 25 litros de leite por dia."
+    ],
+    pig: [
+      "Porcos são muito inteligentes, mais que cachorros!",
+      "Eles têm uma ótima memória e podem reconhecer seus nomes.",
+      "Porcos são animais muito limpos e se separam para fazer suas necessidades."
+    ],
+    plant: [
+      "Plantas 'respiram' liberando oxigênio pela fotossíntese.",
+      "Algumas plantas podem se comunicar umas com as outras através de sinais químicos.",
+      "Plantas crescem em resposta ao toque, luz e gravidade."
+    ]
+  };
+
+  const factBox = document.getElementById('fact-box');
+
+  function randomFact(animal) {
+    const arr = facts[animal];
+    const fact = arr[Math.floor(Math.random() * arr.length)];
+    return fact;
+  }
+
+  function showFact(animal) {
+    factBox.textContent = "Carregando...";
+    setTimeout(() => {
+      factBox.textContent = randomFact(animal);
+    }, 600);
+  }
+
+  document.getElementById('btn-chicken').addEventListener('click', () => showFact('chicken'));
+  document.getElementById('btn-cow').addEventListener('click', () => showFact('cow'));
+  document.getElementById('btn-pig').addEventListener('click', () => showFact('pig'));
+  document.getElementById('btn-plant').addEventListener('click', () => showFact('plant'));
+</script>
+</body>
+</html>
+
